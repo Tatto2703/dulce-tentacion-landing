@@ -4,6 +4,23 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    /* =========================
+       DETECCIÓN DE USUARIO CONVERTIDO
+    ========================= */
+
+    const usuarioConvertido = localStorage.getItem("lp_dulce_convertido");
+
+    if (usuarioConvertido === "true") {
+
+        const formContainer = document.querySelector('.contact-form');
+
+        formContainer.innerHTML = `
+            <div style="text-align:center; padding:40px;">
+                <h3>¡Gracias por tu pedido! 🍰</h3>
+                <p>Ya recibimos tu solicitud anteriormente.</p>
+            </div>
+        `;
+    }
     const navbar = document.getElementById('navbar');
     const form = document.getElementById('landing-form');
     const nombre = document.getElementById('nombre');
@@ -70,19 +87,19 @@ document.addEventListener('DOMContentLoaded', () => {
     ========================= */
 
     nombre.addEventListener("input", () => {
-        localStorage.setItem("lp_nombre", nombre.value);
+        localStorage.setItem("lp_dulce_nombre", nombre.value);
     });
 
     correo.addEventListener("input", () => {
-      localStorage.setItem("lp_correo", correo.value);
+      localStorage.setItem("lp_dulce_correo", correo.value);
     });
 
     tipoPedido.addEventListener("change", () => {
-     localStorage.setItem("lp_tipo", tipoPedido.value);
+     localStorage.setItem("lp_dulce_tipo", tipoPedido.value);
     });
 
     mensaje.addEventListener("input", () => {
-      localStorage.setItem("lp_mensaje", mensaje.value);
+      localStorage.setItem("lp_dulce_mensaje", mensaje.value);
     });
     if (form) {
         form.addEventListener('submit', (e) => {
