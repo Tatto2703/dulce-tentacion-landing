@@ -70,18 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Manejo de envío de formulario (Simulación)
     /* =========================
-        RESTAURAR DATOS
+       RESTAURAR DATOS
     ========================= */
 
     window.addEventListener("load", () => {
 
-        nombre.value = localStorage.getItem("lp_nombre") || "";
-        correo.value = localStorage.getItem("lp_correo") || "";
-        tipoPedido.value = localStorage.getItem("lp_tipo") || "";
-        mensaje.value = localStorage.getItem("lp_mensaje") || "";
+        nombre.value = localStorage.getItem("lp_dulce_nombre") || "";
+        correo.value = localStorage.getItem("lp_dulce_correo") || "";
+        tipoPedido.value = localStorage.getItem("lp_dulce_tipo") || "";
+        mensaje.value = localStorage.getItem("lp_dulce_mensaje") || "";
 
     });
-
     /* =========================
       GUARDAR AUTOMÁTICAMENTE
     ========================= */
@@ -113,12 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
 
             // Simulación de API call (2 segundos de espera)
-            localStorage.setItem("lp_convertido", "true");
+            localStorage.setItem("lp_dulce_convertido", "true");
 
-            localStorage.removeItem("lp_nombre");
-            localStorage.removeItem("lp_correo");
-            localStorage.removeItem("lp_tipo");
-            localStorage.removeItem("lp_mensaje");
+            localStorage.removeItem("lp_dulce_nombre");
+            localStorage.removeItem("lp_dulce_correo");
+            localStorage.removeItem("lp_dulce_tipo");
+            localStorage.removeItem("lp_dulce_mensaje");
             setTimeout(() => {
                 form.innerHTML = `
                     <div style="text-align: center; padding: 40px; background: #E8F5E9; border-radius: 20px;">
@@ -135,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Smooth scroll para navegadores antiguos (opcional, ya manejado por CSS)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
+            //e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 window.scrollTo({
