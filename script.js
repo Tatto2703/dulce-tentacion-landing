@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h3 style="margin-top: 15px; color: #2E7D32">¡Solicitud Enviada!</h3>
                         <p style="margin-top: 10px">Nos pondremos en contacto contigo en las próximas 24 horas.</p>
                         <button class="btn btn-primary" style="margin-top: 20px" onclick="location.reload()">Regresar</button>
-                    </div>git add .
+                    </div>
                 `;
             }, 2000);
         });
