@@ -15,7 +15,7 @@ Landing page profesional para venta de postres artesanales.
 - Diseño responsive
 - Hero section moderna
 - Catálogo de productos
-- Formulario de contacto
+- Formulario de contact o
 - Testimonios
 - Footer profesional
 

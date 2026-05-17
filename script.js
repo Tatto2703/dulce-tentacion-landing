@@ -6,7 +6,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.getElementById('navbar');
     const form = document.getElementById('landing-form');
-
+    const nombre = document.getElementById('nombre');
+    const correo = document.getElementById('correo');
+    const tipoPedido = document.getElementById('tipoPedido');
+    const mensaje = document.getElementById('mensaje');
     // 1. Cambio de estilo del Navbar al hacer scroll
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -49,6 +52,38 @@ document.addEventListener('DOMContentLoaded', () => {
     `, 0);
 
     // 3. Manejo de envío de formulario (Simulación)
+    /* =========================
+        RESTAURAR DATOS
+    ========================= */
+
+    window.addEventListener("load", () => {
+
+        nombre.value = localStorage.getItem("lp_nombre") || "";
+        correo.value = localStorage.getItem("lp_correo") || "";
+        tipoPedido.value = localStorage.getItem("lp_tipo") || "";
+        mensaje.value = localStorage.getItem("lp_mensaje") || "";
+
+    });
+
+    /* =========================
+      GUARDAR AUTOMÁTICAMENTE
+    ========================= */
+
+    nombre.addEventListener("input", () => {
+        localStorage.setItem("lp_nombre", nombre.value);
+    });
+
+    correo.addEventListener("input", () => {
+      localStorage.setItem("lp_correo", correo.value);
+    });
+
+    tipoPedido.addEventListener("change", () => {
+     localStorage.setItem("lp_tipo", tipoPedido.value);
+    });
+
+    mensaje.addEventListener("input", () => {
+      localStorage.setItem("lp_mensaje", mensaje.value);
+    });
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -61,6 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
 
             // Simulación de API call (2 segundos de espera)
+            localStorage.setItem("lp_convertido", "true");
+
+            localStorage.removeItem("lp_nombre");
+            localStorage.removeItem("lp_correo");
+            localStorage.removeItem("lp_tipo");
+            localStorage.removeItem("lp_mensaje");
             setTimeout(() => {
                 form.innerHTML = `
                     <div style="text-align: center; padding: 40px; background: #E8F5E9; border-radius: 20px;">

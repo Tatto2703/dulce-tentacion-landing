@@ -144,22 +144,22 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form id="landing-form">
+                    <form id="landing-form" action="https://formspree.io/f/TU_ID" method="POST">
                         <div class="input-group">
-                            <input type="text" placeholder="Nombre completo" required>
+                            <input type="text" id="nombre" placeholder="Nombre completo" required>
                         </div>
                         <div class="input-group">
-                            <input type="email" placeholder="Correo electrónico" required>
+                            <input type="email" id="correo" placeholder="Correo electrónico" required>
                         </div>
                         <div class="input-group">
-                            <select required>
+                            <select id="tipoPedido" required>
                                 <option value="" disabled selected>Tipo de pedido</option>
                                 <option value="personal">Individual</option>
                                 <option value="evento">Evento / Empresa</option>
                             </select>
                         </div>
                         <div class="input-group">
-                            <textarea placeholder="Describe tu pedido ideal..." rows="4"></textarea>
+                            <textarea id="mensaje" placeholder="Describe tu pedido ideal..." rows="4"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary full-width">Enviar Solicitud</button>
                     </form>
