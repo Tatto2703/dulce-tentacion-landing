@@ -1,30 +1,11 @@
 /**
  * script.js - Dulce Tentación
- * Lógica para efectos visuales, animaciones y persistencia del formulario.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================
-       DETECCIÓN DE USUARIO CONVERTIDO
-    ========================= */
-
-    const usuarioConvertido = localStorage.getItem("lp_dulce_convertido");
-
-    if (usuarioConvertido === "true") {
-
-        const formContainer = document.querySelector('.contact-form');
-
-        formContainer.innerHTML = `
-            <div style="text-align:center; padding:40px;">
-                <h3>¡Gracias por tu pedido! 🍰</h3>
-                <p>Ya recibimos tu solicitud anteriormente.</p>
-            </div>
-        `;
-    }
-
-    /* =========================
-       VARIABLES GENERALES
+       VARIABLES
     ========================= */
 
     const navbar = document.getElementById('navbar');
@@ -36,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensaje = document.getElementById('mensaje');
 
     /* =========================
-       CAMBIO DE NAVBAR AL SCROLL
+       NAVBAR SCROLL
     ========================= */
 
     window.addEventListener('scroll', () => {
@@ -50,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================
-       ANIMACIONES DE ENTRADA
+       ANIMACIONES
     ========================= */
 
     const observerOptions = {
@@ -86,68 +67,84 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    document.styleSheets[0].insertRule(`
-        .reveal-visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-    `, 0);
-
     /* =========================
        RESTAURAR DATOS
     ========================= */
 
-    window.addEventListener("load", () => {
-
+    if (nombre) {
         nombre.value = localStorage.getItem("lp_dulce_nombre") || "";
-        correo.value = localStorage.getItem("lp_dulce_correo") || "";
-        tipoPedido.value = localStorage.getItem("lp_dulce_tipo") || "";
-        mensaje.value = localStorage.getItem("lp_dulce_mensaje") || "";
+    }
 
-    });
+    if (correo) {
+        correo.value = localStorage.getItem("lp_dulce_correo") || "";
+    }
+
+    if (tipoPedido) {
+        tipoPedido.value = localStorage.getItem("lp_dulce_tipo") || "";
+    }
+
+    if (mensaje) {
+        mensaje.value = localStorage.getItem("lp_dulce_mensaje") || "";
+    }
 
     /* =========================
-       GUARDAR AUTOMÁTICAMENTE
+       GUARDAR DATOS
     ========================= */
 
-    nombre.addEventListener("input", () => {
+    if (nombre) {
 
-        localStorage.setItem(
-            "lp_dulce_nombre",
-            nombre.value
-        );
+        nombre.addEventListener("input", () => {
 
-    });
+            localStorage.setItem(
+                "lp_dulce_nombre",
+                nombre.value
+            );
 
-    correo.addEventListener("input", () => {
+        });
 
-        localStorage.setItem(
-            "lp_dulce_correo",
-            correo.value
-        );
+    }
 
-    });
+    if (correo) {
 
-    tipoPedido.addEventListener("change", () => {
+        correo.addEventListener("input", () => {
 
-        localStorage.setItem(
-            "lp_dulce_tipo",
-            tipoPedido.value
-        );
+            localStorage.setItem(
+                "lp_dulce_correo",
+                correo.value
+            );
 
-    });
+        });
 
-    mensaje.addEventListener("input", () => {
+    }
 
-        localStorage.setItem(
-            "lp_dulce_mensaje",
-            mensaje.value
-        );
+    if (tipoPedido) {
 
-    });
+        tipoPedido.addEventListener("change", () => {
+
+            localStorage.setItem(
+                "lp_dulce_tipo",
+                tipoPedido.value
+            );
+
+        });
+
+    }
+
+    if (mensaje) {
+
+        mensaje.addEventListener("input", () => {
+
+            localStorage.setItem(
+                "lp_dulce_mensaje",
+                mensaje.value
+            );
+
+        });
+
+    }
 
     /* =========================
-       ENVÍO DEL FORMULARIO
+       ENVÍO FORMULARIO
     ========================= */
 
     if (form) {
@@ -156,31 +153,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
             e.preventDefault();
 
-            // Marcar usuario convertido
             localStorage.setItem(
                 "lp_dulce_convertido",
                 "true"
             );
 
-            // Limpiar datos guardados
             localStorage.removeItem("lp_dulce_nombre");
             localStorage.removeItem("lp_dulce_correo");
             localStorage.removeItem("lp_dulce_tipo");
             localStorage.removeItem("lp_dulce_mensaje");
 
-            // Animación del botón
             const submitBtn = form.querySelector('button');
 
             submitBtn.innerText = 'Enviando...';
             submitBtn.disabled = true;
 
-            // Simulación de envío exitoso
             setTimeout(() => {
 
                 form.innerHTML = `
                     <div style="text-align: center; padding: 40px; background: #E8F5E9; border-radius: 20px;">
-                        <ion-icon name="checkmark-circle-outline" style="font-size: 50px; color: #4CAF50"></ion-icon>
-
+                        
                         <h3 style="margin-top: 15px; color: #2E7D32">
                             ¡Solicitud Enviada!
                         </h3>
@@ -196,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         >
                             Regresar
                         </button>
+
                     </div>
                 `;
 
@@ -232,32 +225,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-/* =========================
-   SLIDER TESTIMONIOS
-========================= */
+    /* =========================
+       SLIDER TESTIMONIOS
+    ========================= */
 
-const track = document.getElementById('dtTestimonialTrack');
-const cards = document.querySelectorAll('.dt-testimonial-card');
-const nextBtn = document.getElementById('dtNextBtn');
-const prevBtn = document.getElementById('dtPrevBtn');
+    const track = document.getElementById('dtTestimonialTrack');
+    const cards = document.querySelectorAll('.dt-testimonial-card');
+    const nextBtn = document.getElementById('dtNextBtn');
+    const prevBtn = document.getElementById('dtPrevBtn');
 
-if (track && nextBtn && prevBtn) {
+    if (track && nextBtn && prevBtn) {
 
-    let currentIndex = 0;
+        let currentIndex = 0;
 
-    const updateSlider = () => {
-        track.style.transform = `translateX(${currentIndex * -100}%)`;
-    };
+        const updateSlider = () => {
+            track.style.transform = `translateX(${currentIndex * -100}%)`;
+        };
 
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % cards.length;
-        updateSlider();
-    });
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateSlider();
+        });
 
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        updateSlider();
-    });
-}
-    
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            updateSlider();
+        });
+
+    }
+
 });

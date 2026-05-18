@@ -568,4 +568,12 @@ section {
         text-align: center;
         gap: 30px;
     }
+    /* =========================
+       ANIMACIONES REVEAL
+    ========================= */
+
+    .reveal-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    }
 }
