@@ -232,4 +232,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+/* =========================
+   SLIDER TESTIMONIOS
+========================= */
+
+const track = document.getElementById('dtTestimonialTrack');
+const cards = document.querySelectorAll('.dt-testimonial-card');
+const nextBtn = document.getElementById('dtNextBtn');
+const prevBtn = document.getElementById('dtPrevBtn');
+
+if (track && nextBtn && prevBtn) {
+
+    let currentIndex = 0;
+
+    const updateSlider = () => {
+        track.style.transform = `translateX(${currentIndex * -100}%)`;
+    };
+
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateSlider();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        updateSlider();
+    });
+}
+    
 });
