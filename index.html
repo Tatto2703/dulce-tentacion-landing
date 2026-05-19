@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dulce Tentación | Repostería Artesanal Premium</title>
-    <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Ionicons for icons -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Ionicons v7 scripts (non-module fallback included for better CORS stability) -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
-<body>
+<body class="bg-white">
+    <div id="root"></div>
+
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar transition-all duration-300" id="navbar">
         <div class="nav-container">
             <a href="#" class="logo">Dulce <span>Tentación</span></a>
             <ul class="nav-links">
@@ -49,22 +52,22 @@
             </div>
             <div class="benefits-grid">
                 <div class="benefit-card">
-                    <ion-icon name="heart-outline"></ion-icon>
+                    <ion-icon name="heart-outline" class="text-primary text-5xl mb-5"></ion-icon>
                     <h3>Pasión Artesanal</h3>
                     <p>Cada receta es única y preparada desde cero, sin conservantes ni colorantes artificiales.</p>
                 </div>
                 <div class="benefit-card">
-                    <ion-icon name="leaf-outline"></ion-icon>
+                    <ion-icon name="leaf-outline" class="text-primary text-5xl mb-5"></ion-icon>
                     <h3>Ingredientes Premium</h3>
                     <p>Utilizamos solo las mejores materias primas: chocolate belga, vainilla pura y frutas frescas.</p>
                 </div>
                 <div class="benefit-card">
-                    <ion-icon name="rocket-outline"></ion-icon>
+                    <ion-icon name="rocket-outline" class="text-primary text-5xl mb-5"></ion-icon>
                     <h3>Envío Delicado</h3>
                     <p>Tu pedido llega impecable y fresco gracias a nuestro sistema de logística especializado.</p>
                 </div>
                 <div class="benefit-card">
-                    <ion-icon name="gift-outline"></ion-icon>
+                    <ion-icon name="gift-outline" class="text-primary text-5xl mb-5"></ion-icon>
                     <h3>Empaques Elegantes</h3>
                     <p>Presentaciones exclusivas perfectas para regalos y eventos especiales.</p>
                 </div>
@@ -82,7 +85,7 @@
             <div class="products-grid">
                 <div class="product-card">
                     <div class="product-badge">Top Ventas</div>
-                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=600" alt="Postre Chocolate">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=600" alt="Postre Chocolate" loading="lazy">
                     <div class="product-info">
                         <h3>Mousse de Chocolate Belga</h3>
                         <p>Textura sedosa con corazón de frutos rojos.</p>
@@ -90,7 +93,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&q=80&w=600" alt="Cheesecake">
+                    <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&q=80&w=600" alt="Cheesecake" loading="lazy">
                     <div class="product-info">
                         <h3>Cheesecake de Arándanos</h3>
                         <p>Base crujiente con coulis natural de frutos del bosque.</p>
@@ -98,7 +101,7 @@
                     </div>
                 </div>
                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=600" alt="Cupcakes">
+                    <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=600" alt="Cupcakes" loading="lazy">
                     <div class="product-info">
                         <h3>Cupcakes Gourmet</h3>
                         <p>Decoración artesanal con sabores personalizados.</p>
@@ -109,21 +112,58 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <!-- Testimonials Section (Static) -->
     <section class="testimonials">
         <div class="container">
             <div class="testimonials-container">
-                <div class="testimonial-card">
-                    <ion-icon name="quote-outline" class="quote-icon"></ion-icon>
-                    <p>"Los mejores postres que he probado en años. La presentación es impecable y el sabor es de otro planeta."</p>
+                <div class="testimonial-card shadow-lg bg-white p-10 rounded-2xl">
+                    <ion-icon name="quote-outline" class="quote-icon text-primary/20 text-6xl mb-8"></ion-icon>
+                    <p class="text-2xl italic text-brown mb-8 font-serif leading-relaxed">"Los mejores postres que he probado en años. La presentación es impecable y el sabor es de otro planeta."</p>
                     <div class="client-info">
-                        <strong>Carla Martínez</strong>
-                        <span>Cliente Fiel</span>
-                        <p class="extra-review">"Definitivamente volveré a comprar."</p>
+                        <strong class="text-xl">Carla Martínez</strong>
+                        <span class="text-sm opacity-60">Cliente Fiel</span>
+                        <p class="extra-review text-xs mt-2 italic opacity-40">"Definitivamente volveré a comprar."</p>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Testimonials Section (Slider) -->
+    <section class="dt-testimonials-section" id="testimonios">
+      <div class="dt-testimonials-container">
+        <div class="dt-testimonial-slider" id="dtTestimonialSlider">
+          <div class="dt-testimonial-track" id="dtTestimonialTrack">
+            <div class="dt-testimonial-card">
+              <div class="dt-testimonial-body">
+                <p class="dt-testimonial-comentario font-sans italic text-lg leading-relaxed mb-6">"Los pasteles de Dulce Tentación son obras de arte. El sabor es tan premium como su presentación. ¡Un sueño hecho realidad!"</p>
+                <h4 class="dt-testimonial-nombre font-serif text-2xl font-bold text-primary">Mariana Silva</h4>
+              </div>
+            </div>
+            <div class="dt-testimonial-card">
+              <div class="dt-testimonial-body">
+                <p class="dt-testimonial-comentario font-sans italic text-lg leading-relaxed mb-6">"La atención al detalle es increíble. Los macarons son los mejores que he probado fuera de París. Totalmente recomendados."</p>
+                <h4 class="dt-testimonial-nombre font-serif text-2xl font-bold text-primary">Carlos Rivera</h4>
+              </div>
+            </div>
+            <div class="dt-testimonial-card">
+              <div class="dt-testimonial-body">
+                <p class="dt-testimonial-comentario font-sans italic text-lg leading-relaxed mb-6">"Artesanal de verdad. Se nota que usan ingredientes de la más alta calidad. Mi lugar favorito para celebraciones."</p>
+                <h4 class="dt-testimonial-nombre font-serif text-2xl font-bold text-primary">Elena Gómez</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="dt-testimonial-controles flex justify-center gap-5 mt-8">
+            <button class="dt-prev dt-testimonial-btn" id="dtPrevBtn" aria-label="Anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="dt-next dt-testimonial-btn" id="dtNextBtn" aria-label="Siguiente">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Contact Form Section -->
@@ -131,99 +171,66 @@
         <div class="container">
             <div class="contact-grid">
                 <div class="contact-info">
-                    <h2>Creamos experiencias dulces únicas</h2>
-                    <p>Cuéntanos tus ideas y personalizaremos el postre perfecto para tu celebración.</p>
+                    <h2 class="text-5xl font-serif mb-5 text-brown">Creamos experiencias dulces únicas</h2>
+                    <p class="text-secondary opacity-80 leading-relaxed mb-10">Cuéntanos tus ideas y personalizaremos el postre perfecto para tu celebración.</p>
                     <div class="contact-details">
-                        <div class="detail-item">
-                            <ion-icon name="location-outline"></ion-icon>
+                        <div class="detail-item flex items-center gap-4 mb-5">
+                            <ion-icon name="location-outline" class="text-primary text-2xl"></ion-icon>
                             <p>Calle Dulce 123, Ciudad Pastel</p>
                         </div>
-                        <div class="detail-item">
-                            <ion-icon name="call-outline"></ion-icon>
+                        <div class="detail-item flex items-center gap-4">
+                            <ion-icon name="call-outline" class="text-primary text-2xl"></ion-icon>
                             <p>+34 900 123 456</p>
                         </div>
                     </div>
                 </div>
-                <div class="contact-form">
+                <div class="contact-form bg-white p-10 rounded-2xl shadow-xl">
                     <form id="landing-form" action="https://formspree.io/f/mvzypnbb" method="POST">
-                        <div class="input-group">
-                            <input type="text" id="nombre" placeholder="Nombre completo" required>
+                        <div class="input-group mb-5">
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required class="w-full p-4 border-2 border-gray-100 rounded-xl outline-none focus:border-primary transition-all">
                         </div>
-                        <div class="input-group">
-                            <input type="email" id="correo" placeholder="Correo electrónico" required>
+                        <div class="input-group mb-5">
+                            <input type="email" id="correo" name="email" placeholder="Correo electrónico" required class="w-full p-4 border-2 border-gray-100 rounded-xl outline-none focus:border-primary transition-all">
                         </div>
-                        <div class="input-group">
-                            <select id="tipoPedido" required>
+                        <div class="input-group mb-5">
+                            <select id="tipoPedido" name="tipoPedido" required class="w-full p-4 border-2 border-gray-100 rounded-xl outline-none focus:border-primary transition-all">
                                 <option value="" disabled selected>Tipo de pedido</option>
                                 <option value="personal">Individual</option>
                                 <option value="evento">Evento / Empresa</option>
                             </select>
                         </div>
-                        <div class="input-group">
-                            <textarea id="mensaje" placeholder="Describe tu pedido ideal..." rows="4"></textarea>
+                        <div class="input-group mb-8">
+                            <textarea id="mensaje" name="mensaje" placeholder="Describe tu pedido ideal..." rows="4" class="w-full p-4 border-2 border-gray-100 rounded-xl outline-none focus:border-primary transition-all"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary full-width">Enviar Solicitud</button>
+                        <button type="submit" class="btn btn-primary w-full py-4 text-white font-bold rounded-full shadow-lg shadow-primary/30 transform transition-transform hover:-translate-y-1">Enviar Solicitud</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-<section class="dt-testimonials-section">
-  <div class="dt-testimonials-container">
-    <div class="dt-testimonial-slider" id="dtTestimonialSlider">
-      <div class="dt-testimonial-track" id="dtTestimonialTrack">
-        <div class="dt-testimonial-card">
-          <div class="dt-testimonial-body">
-            <p class="dt-testimonial-comentario">"Los pasteles de Dulce Tentación son obras de arte. El sabor es tan premium como su presentación. ¡Un sueño hecho realidad!"</p>
-            <h4 class="dt-testimonial-nombre">Mariana Silva</h4>
-          </div>
-        </div>
-        <div class="dt-testimonial-card">
-          <div class="dt-testimonial-body">
-            <p class="dt-testimonial-comentario">"La atención al detalle es increíble. Los macarons son los mejores que he probado fuera de París. Totalmente recomendados."</p>
-            <h4 class="dt-testimonial-nombre">Carlos Rivera</h4>
-          </div>
-        </div>
-        <div class="dt-testimonial-card">
-          <div class="dt-testimonial-body">
-            <p class="dt-testimonial-comentario">"Artesanal de verdad. Se nota que usan ingredientes de la más alta calidad. Mi lugar favorito para celebraciones."</p>
-            <h4 class="dt-testimonial-nombre">Elena Gómez</h4>
-          </div>
-        </div>
-      </div>
 
-      <div class="dt-testimonial-controles">
-        <button class="dt-testimonial-btn dt-prev" id="dtPrevBtn" aria-label="Anterior">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
-        <button class="dt-testimonial-btn dt-next" id="dtNextBtn" aria-label="Siguiente">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#" class="logo">Dulce <span>Tentación</span></a>
-                    <p>Endulzando tus mejores momentos de forma natural y elegante.</p>
+    <footer class="footer bg-brown text-white py-20 mt-10">
+        <div class="container mx-auto">
+            <div class="footer-grid flex flex-col md:flex-row justify-between items-center pb-12 border-b border-white/10 gap-10">
+                <div class="footer-brand text-center md:text-left">
+                    <a href="#" class="logo text-3xl font-serif text-white">Dulce <span class="text-primary font-bold">Tentación</span></a>
+                    <p class="opacity-60 max-w-sm mt-4">Endulzando tus mejores momentos de forma natural y elegante.</p>
                 </div>
-                <div class="footer-social">
-                    <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-pinterest"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-tiktok"></ion-icon></a>
+                <div class="footer-social flex gap-6">
+                    <a href="#" class="text-3xl hover:text-primary transition-colors"><ion-icon name="logo-instagram"></ion-icon></a>
+                    <a href="#" class="text-3xl hover:text-primary transition-colors"><ion-icon name="logo-facebook"></ion-icon></a>
+                    <a href="#" class="text-3xl hover:text-primary transition-colors"><ion-icon name="logo-pinterest"></ion-icon></a>
+                    <a href="#" class="text-3xl hover:text-primary transition-colors"><ion-icon name="logo-tiktok"></ion-icon></a>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="footer-bottom text-center mt-8 opacity-40 text-sm">
                 <p>&copy; 2026 Dulce Tentación. Diseñado con pasión pastelera.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/script.js"></script>
 </body>
 </html>
