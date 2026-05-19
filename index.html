@@ -2,28 +2,33 @@
 <html lang="es">
 
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Dulce Tentación | Repostería Artesanal Premium</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet"
+    />
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
 
     <!-- Ionicons -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">
+    </script>
 
-    <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+    <script
+        nomodule
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js">
+    </script>
 </head>
 
 <body>
@@ -31,431 +36,336 @@
     <!-- =========================
          NAVBAR
     ========================= -->
+    <nav
+        class="navbar"
+        id="navbar"
+        aria-label="Navegación principal de Dulce Tentación"
+    >
+        <div class="container nav-container">
 
-    <nav class="navbar" id="navbar">
-
-        <div class="nav-container">
-
-            <a href="#" class="logo">
+            <a href="#" class="logo" id="main-brand-logo">
                 Dulce <span>Tentación</span>
             </a>
 
             <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
 
-                <li>
-                    <a href="#inicio">Inicio</a>
-                </li>
+                <!-- CORREGIDO -->
+                <li><a href="#beneficios">Nosotros</a></li>
 
-                <li>
-                    <a href="#beneficios">Nosotros</a>
-                </li>
-
-                <li>
-                    <a href="#productos">Productos</a>
-                </li>
-
-                <li>
-                    <a href="#contacto">Contacto</a>
-                </li>
-
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
             </ul>
 
-            <button class="btn-cta">
+            <button
+                class="btn-cta"
+                id="global-cta-order"
+                onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})"
+            >
                 Ordenar Ya
             </button>
 
         </div>
-
     </nav>
 
     <!-- =========================
-         HERO
+         MAIN
     ========================= -->
-
-    <section class="hero" id="inicio">
-
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-
-            <span class="hero-subtitle">
-                Repostería artesanal premium
-            </span>
-
-            <h1>
-                El placer de lo artesanal en cada bocado
-            </h1>
-
-            <p>
-                Descubre nuestra selección exclusiva de postres gourmet elaborados con ingredientes 100% naturales.
-            </p>
-
-            <div class="hero-buttons">
-
-                <a href="#productos" class="btn btn-primary">
-                    Ver Catálogo
-                </a>
-
-                <a href="#contacto" class="btn btn-secondary">
-                    Contactar
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- =========================
-         BENEFICIOS
-    ========================= -->
-
-    <section class="benefits" id="beneficios">
-
-        <div class="container">
-
-            <div class="section-header">
-
-                <h2>
-                    ¿Qué nos hace especiales?
-                </h2>
-
-                <div class="line"></div>
-
-            </div>
-
-            <div class="benefits-grid">
-
-                <div class="benefit-card">
-
-                    <ion-icon name="heart-outline"></ion-icon>
-
-                    <h3>
-                        Pasión Artesanal
-                    </h3>
-
-                    <p>
-                        Cada receta es única y preparada desde cero, sin conservantes ni colorantes artificiales.
-                    </p>
-
-                </div>
-
-                <div class="benefit-card">
-
-                    <ion-icon name="leaf-outline"></ion-icon>
-
-                    <h3>
-                        Ingredientes Premium
-                    </h3>
-
-                    <p>
-                        Utilizamos solo las mejores materias primas: chocolate belga, vainilla pura y frutas frescas.
-                    </p>
-
-                </div>
-
-                <div class="benefit-card">
-
-                    <ion-icon name="rocket-outline"></ion-icon>
-
-                    <h3>
-                        Envío Delicado
-                    </h3>
-
-                    <p>
-                        Tu pedido llega impecable y fresco gracias a nuestro sistema de logística especializado.
-                    </p>
-
-                </div>
-
-                <div class="benefit-card">
-
-                    <ion-icon name="gift-outline"></ion-icon>
-
-                    <h3>
-                        Empaques Elegantes
-                    </h3>
-
-                    <p>
-                        Presentaciones exclusivas perfectas para regalos y eventos especiales.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- =========================
-         PRODUCTOS
-    ========================= -->
-
-    <section class="products" id="productos">
-
-        <div class="container">
-
-            <div class="section-header">
-
-                <h2>
-                    Nuestros Postres Estrella
-                </h2>
-
-                <div class="line"></div>
-
-            </div>
-
-            <div class="products-grid">
-
-                <div class="product-card">
-
-                    <div class="product-badge">
-                        Top Ventas
-                    </div>
-
-                    <img 
-                        src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=600"
-                        alt="Mousse Chocolate"
-                    >
-
-                    <div class="product-info">
-
-                        <h3>
-                            Mousse de Chocolate Belga
-                        </h3>
-
-                        <p>
-                            Textura sedosa con corazón de frutos rojos.
-                        </p>
-
-                        <span class="price">
-                            $12.50
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="product-card">
-
-                    <img 
-                        src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&q=80&w=600"
-                        alt="Cheesecake"
-                    >
-
-                    <div class="product-info">
-
-                        <h3>
-                            Cheesecake de Arándanos
-                        </h3>
-
-                        <p>
-                            Base crujiente con coulis natural de frutos del bosque.
-                        </p>
-
-                        <span class="price">
-                            $10.00
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="product-card">
-
-                    <img 
-                        src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=600"
-                        alt="Cupcakes"
-                    >
-
-                    <div class="product-info">
-
-                        <h3>
-                            Cupcakes Gourmet
-                        </h3>
-
-                        <p>
-                            Decoración artesanal con sabores personalizados.
-                        </p>
-
-                        <span class="price">
-                            $11.00
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- =========================
-         TESTIMONIO
-    ========================= -->
-
-    <section class="testimonials">
-
-        <div class="container">
-
-            <div class="testimonial-card">
-
-                <ion-icon 
-                    name="quote-outline"
-                    class="quote-icon">
-                </ion-icon>
+    <main id="main-content">
+
+        <!-- HERO -->
+        <section
+            class="hero"
+            id="inicio"
+            aria-labelledby="hero-title"
+        >
+
+            <div class="hero-content">
+
+                <span class="hero-subtitle">
+                    Repostería artesanal premium
+                </span>
+
+                <h1 id="hero-title">
+                    El placer de lo artesanal en cada bocado
+                </h1>
 
                 <p>
-                    "Los mejores postres que he probado en años. La presentación es impecable y el sabor es de otro planeta."
+                    Descubre nuestra selección exclusiva de postres gourmet elaborados con ingredientes 100% naturales.
                 </p>
 
-                <div class="client-info">
+                <div class="hero-buttons">
 
-                    <strong>
-                        Carla Martínez
-                    </strong>
+                    <a
+                        href="#productos"
+                        class="btn btn-primary"
+                    >
+                        Ver Catálogo
+                    </a>
 
-                    <span>
-                        Cliente Fiel
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- =========================
-         SLIDER TESTIMONIOS
-    ========================= -->
-
-    <section class="dt-testimonials-section">
-
-        <div class="container">
-
-            <div class="dt-testimonial-slider">
-
-                <div class="dt-testimonial-track" id="dtTestimonialTrack">
-
-                    <div class="dt-testimonial-card">
-
-                        <div class="dt-testimonial-body">
-
-                            <p class="dt-testimonial-comentario">
-                                "Los pasteles de Dulce Tentación son obras de arte."
-                            </p>
-
-                            <h4 class="dt-testimonial-nombre">
-                                Mariana Silva
-                            </h4>
-
-                        </div>
-
-                    </div>
-
-                    <div class="dt-testimonial-card">
-
-                        <div class="dt-testimonial-body">
-
-                            <p class="dt-testimonial-comentario">
-                                "Los macarons son los mejores que he probado."
-                            </p>
-
-                            <h4 class="dt-testimonial-nombre">
-                                Carlos Rivera
-                            </h4>
-
-                        </div>
-
-                    </div>
-
-                    <div class="dt-testimonial-card">
-
-                        <div class="dt-testimonial-body">
-
-                            <p class="dt-testimonial-comentario">
-                                "Se nota la calidad artesanal."
-                            </p>
-
-                            <h4 class="dt-testimonial-nombre">
-                                Elena Gómez
-                            </h4>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="dt-testimonial-controles">
-
-                    <button 
-                        class="dt-testimonial-btn"
-                        id="dtPrevBtn">
-
-                        <ion-icon name="chevron-back-outline"></ion-icon>
-
-                    </button>
-
-                    <button 
-                        class="dt-testimonial-btn"
-                        id="dtNextBtn">
-
-                        <ion-icon name="chevron-forward-outline"></ion-icon>
-
-                    </button>
+                    <a
+                        href="#contacto"
+                        class="btn btn-secondary"
+                    >
+                        Contactar
+                    </a>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
+        <!-- BENEFICIOS -->
+        <section
+            class="benefits"
+            id="beneficios"
+            aria-labelledby="benefits-title"
+        >
 
-    <!-- =========================
-         CONTACTO
-    ========================= -->
+            <div class="container">
 
-    <section class="contact" id="contacto">
-
-        <div class="container">
-
-            <div class="contact-grid">
-
-                <div class="contact-info">
-
-                    <h2>
-                        Creamos experiencias dulces únicas
+                <div class="section-header">
+                    <h2 id="benefits-title">
+                        ¿Qué nos hace especiales?
                     </h2>
 
-                    <p>
-                        Cuéntanos tus ideas y personalizaremos el postre perfecto.
-                    </p>
+                    <div class="line"></div>
+                </div>
 
-                    <div class="contact-details">
+                <div class="benefits-grid">
 
-                        <div class="detail-item">
+                    <article class="benefit-card">
 
-                            <ion-icon name="location-outline"></ion-icon>
+                        <ion-icon
+                            name="heart-outline"
+                            aria-hidden="true">
+                        </ion-icon>
+
+                        <h3>Pasión Artesanal</h3>
+
+                        <p>
+                            Cada receta es única y preparada desde cero,
+                            sin conservantes ni colorantes artificiales.
+                        </p>
+
+                    </article>
+
+                    <article class="benefit-card">
+
+                        <ion-icon
+                            name="leaf-outline"
+                            aria-hidden="true">
+                        </ion-icon>
+
+                        <h3>Ingredientes Premium</h3>
+
+                        <p>
+                            Utilizamos solo materias primas seleccionadas
+                            cuidadosamente para garantizar sabor y calidad.
+                        </p>
+
+                    </article>
+
+                    <article class="benefit-card">
+
+                        <ion-icon
+                            name="rocket-outline"
+                            aria-hidden="true">
+                        </ion-icon>
+
+                        <h3>Entrega Especializada</h3>
+
+                        <p>
+                            Cada pedido llega fresco, elegante y protegido
+                            gracias a nuestra logística refrigerada.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PRODUCTOS -->
+        <section
+            class="products"
+            id="productos"
+            aria-labelledby="products-title"
+        >
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2 id="products-title">
+                        Nuestros Postres Estrella
+                    </h2>
+
+                    <div class="line"></div>
+
+                </div>
+
+                <!-- COUNTDOWN -->
+                <div
+                    class="dt-countdown"
+                    id="live-campaign-countdown"
+                >
+
+                    <h3>
+                        ⏳ ¡OFERTA LIMITADA!
+                    </h3>
+
+                    <div
+                        class="timer-digits"
+                        id="countdown-timer"
+                    >
+                        01:00:00
+                    </div>
+
+                </div>
+
+                <div class="products-grid">
+
+                    <!-- PRODUCTO 1 -->
+                    <article class="product-card">
+
+                        <div class="product-badge">
+                            Top Ventas
+                        </div>
+
+                        <img
+                            src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=600"
+                            alt="Mousse de chocolate belga"
+                            loading="lazy"
+                        />
+
+                        <div class="product-info">
+
+                            <h3>Mousse de Chocolate Belga</h3>
 
                             <p>
-                                Calle Dulce 123, Ciudad Pastel
+                                Textura cremosa y suave con ingredientes premium.
                             </p>
+
+                            <span class="price">
+                                $12.50
+                            </span>
 
                         </div>
 
-                        <div class="detail-item">
+                    </article>
 
-                            <ion-icon name="call-outline"></ion-icon>
+                    <!-- PRODUCTO 2 -->
+                    <article class="product-card">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&q=80&w=600"
+                            alt="Cheesecake artesanal de arándanos"
+                            loading="lazy"
+                        />
+
+                        <div class="product-info">
+
+                            <h3>Cheesecake de Arándanos</h3>
 
                             <p>
-                                +34 900 123 456
+                                Cheesecake artesanal con base crujiente y coulis natural.
+                            </p>
+
+                            <span class="price">
+                                $10.00
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                    <!-- PRODUCTO 3 -->
+                    <article class="product-card">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=600"
+                            alt="Cupcakes gourmet decorados"
+                            loading="lazy"
+                        />
+
+                        <div class="product-info">
+
+                            <h3>Cupcakes Gourmet</h3>
+
+                            <p>
+                                Decoraciones personalizadas y buttercream artesanal.
+                            </p>
+
+                            <span class="price">
+                                $11.00
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- FAQ -->
+        <section
+            class="faq-section"
+            id="faq"
+            aria-labelledby="faq-title"
+        >
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2 id="faq-title">
+                        Preguntas Frecuentes
+                    </h2>
+
+                    <div class="line"></div>
+
+                </div>
+
+                <div class="dt-faq">
+
+                    <div class="faq-item">
+
+                        <div
+                            class="faq-header"
+                            tabindex="0"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="faq-1"
+                            id="faq-btn-1"
+                        >
+
+                            <span>
+                                ¿Con cuánta anticipación debo hacer mi pedido?
+                            </span>
+
+                            <ion-icon
+                                name="chevron-down-outline"
+                                aria-hidden="true">
+                            </ion-icon>
+
+                        </div>
+
+                        <div
+                            class="faq-body"
+                            id="faq-1"
+                            aria-labelledby="faq-btn-1"
+                        >
+
+                            <p>
+                                Recomendamos realizar pedidos con al menos
+                                48 horas de anticipación.
                             </p>
 
                         </div>
@@ -464,97 +374,211 @@
 
                 </div>
 
-                <div class="contact-form">
+            </div>
 
-                    <form 
-                        id="landing-form"
-                        action="https://formspree.io/f/mvzypnbb"
-                        method="POST"
-                    >
+        </section>
 
-                        <div class="input-group">
+        <!-- CONTACTO -->
+        <section
+            class="contact"
+            id="contacto"
+            aria-labelledby="contact-title"
+        >
 
-                            <input 
-                                type="text"
-                                id="nombre"
-                                name="nombre"
-                                placeholder="Nombre completo"
-                                required
-                            >
+            <div class="container">
 
-                        </div>
+                <div class="contact-grid">
 
-                        <div class="input-group">
+                    <div class="contact-info">
 
-                            <input 
-                                type="email"
-                                id="correo"
-                                name="email"
-                                placeholder="Correo electrónico"
-                                required
-                            >
+                        <h2 id="contact-title">
+                            Creamos experiencias dulces únicas
+                        </h2>
 
-                        </div>
+                        <p>
+                            Escríbenos y cotiza tu pedido personalizado.
+                        </p>
 
-                        <div class="input-group">
+                    </div>
 
-                            <select 
-                                id="tipoPedido"
-                                name="tipoPedido"
-                                required
-                            >
+                    <div class="contact-form">
 
-                                <option value="">
-                                    Tipo de pedido
-                                </option>
-
-                                <option value="personal">
-                                    Individual
-                                </option>
-
-                                <option value="evento">
-                                    Evento / Empresa
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="input-group">
-
-                            <textarea 
-                                id="mensaje"
-                                name="mensaje"
-                                placeholder="Describe tu pedido ideal..."
-                                rows="4"
-                                required>
-                            </textarea>
-
-                        </div>
-
-                        <button 
-                            type="submit"
-                            class="btn btn-primary full-width"
+                        <form
+                            id="landing-form"
+                            action="https://formspree.io/f/mvzypnbb"
+                            method="POST"
+                            aria-label="Formulario de contacto"
                         >
 
-                            Enviar Solicitud
+                            <div class="input-group">
 
-                        </button>
+                                <label
+                                    for="nombre"
+                                    class="sr-only"
+                                >
+                                    Nombre
+                                </label>
 
-                    </form>
+                                <input
+                                    type="text"
+                                    id="nombre"
+                                    name="nombre"
+                                    placeholder="Nombre completo"
+                                    required
+                                />
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label
+                                    for="correo"
+                                    class="sr-only"
+                                >
+                                    Correo
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="correo"
+                                    name="email"
+                                    placeholder="Correo electrónico"
+                                    required
+                                />
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label
+                                    for="mensaje"
+                                    class="sr-only"
+                                >
+                                    Mensaje
+                                </label>
+
+                                <textarea
+                                    id="mensaje"
+                                    name="mensaje"
+                                    placeholder="Describe tu pedido..."
+                                    rows="4"
+                                    required
+                                ></textarea>
+
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary full-width"
+                            >
+                                Enviar Solicitud
+                            </button>
+
+                        </form>
+
+                    </div>
 
                 </div>
 
             </div>
 
+        </section>
+
+    </main>
+
+    <!-- POPUP -->
+    <aside
+        class="dt-popup"
+        id="dt-newsletter"
+        aria-labelledby="popup-title"
+    >
+
+        <button
+            class="close-popup"
+            aria-label="Cerrar popup"
+        >
+            &times;
+        </button>
+
+        <div class="popup-content">
+
+            <h3 id="popup-title">
+                ¿Un gustito extra? 🍰
+            </h3>
+
+            <p>
+                Suscríbete y recibe un descuento especial.
+            </p>
+
+            <form id="popup-form">
+
+                <label
+                    for="popup-email"
+                    class="sr-only"
+                >
+                    Correo electrónico
+                </label>
+
+                <input
+                    type="email"
+                    id="popup-email"
+                    class="input-modern"
+                    placeholder="Tu correo..."
+                    required
+                />
+
+                <button
+                    type="submit"
+                    class="btn btn-primary full-width"
+                >
+                    Obtener Cupón
+                </button>
+
+            </form>
+
         </div>
 
-    </section>
+    </aside>
 
-    <!-- =========================
-         FOOTER
-    ========================= -->
+    <!-- MODAL LEGAL -->
+    <div
+        class="legal-modal"
+        id="legal-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="legal-title"
+    >
 
+        <div class="legal-modal-content">
+
+            <button
+                class="close-legal-modal"
+                id="close-legal-modal"
+                aria-label="Cerrar aviso legal"
+            >
+                &times;
+            </button>
+
+            <h3 id="legal-title">
+                Aviso Legal
+            </h3>
+
+            <!-- CORREGIDO -->
+            <p>
+                Este sitio utiliza Formspree para procesar formularios
+                de contacto de manera segura.
+            </p>
+
+            <p>
+                Los datos enviados se utilizan únicamente con fines
+                demostrativos y académicos.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
     <footer class="footer">
 
         <div class="container">
@@ -568,27 +592,23 @@
                     </a>
 
                     <p>
-                        Endulzando tus mejores momentos.
+                        Endulzando momentos especiales con repostería artesanal.
                     </p>
 
                 </div>
 
                 <div class="footer-social">
 
-                    <a href="#">
+                    <a href="#" aria-label="Instagram">
                         <ion-icon name="logo-instagram"></ion-icon>
                     </a>
 
-                    <a href="#">
+                    <a href="#" aria-label="Facebook">
                         <ion-icon name="logo-facebook"></ion-icon>
                     </a>
 
-                    <a href="#">
+                    <a href="#" aria-label="Pinterest">
                         <ion-icon name="logo-pinterest"></ion-icon>
-                    </a>
-
-                    <a href="#">
-                        <ion-icon name="logo-tiktok"></ion-icon>
                     </a>
 
                 </div>
@@ -599,6 +619,17 @@
 
                 <p>
                     &copy; 2026 Dulce Tentación.
+                    Todos los derechos reservados.
+                </p>
+
+                <p>
+                    <a
+                        href="#"
+                        id="legal-trigger"
+                        class="footer-legal-link"
+                    >
+                        Aviso Legal
+                    </a>
                 </p>
 
             </div>
@@ -607,7 +638,7 @@
 
     </footer>
 
-    <!-- JS -->
+    <!-- JAVASCRIPT -->
     <script src="script.js"></script>
 
 </body>

@@ -1,7 +1,11 @@
 /* =========================
+   FUENTES E IMPORTACIONES
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+/* =========================
    VARIABLES Y RESET
 ========================= */
-
 :root {
     --primary: #F06292;
     --primary-light: #F8BBD0;
@@ -30,6 +34,9 @@ body {
     color: var(--text);
     background: var(--white);
     line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 img {
@@ -45,9 +52,25 @@ img {
 }
 
 /* =========================
+   ACCESIBILIDAD
+========================= */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+}
+
+*:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* =========================
    TIPOGRAFÍA
 ========================= */
-
 h1,
 h2,
 h3,
@@ -59,7 +82,6 @@ h3,
 /* =========================
    NAVBAR
 ========================= */
-
 .navbar {
     position: fixed;
     top: 0;
@@ -72,8 +94,8 @@ h3,
 
 .navbar.scrolled {
     background: rgba(255,255,255,0.96);
-    box-shadow: var(--shadow);
     backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
     padding: 12px 0;
 }
 
@@ -105,6 +127,23 @@ h3,
     color: var(--brown);
     font-weight: 600;
     transition: var(--transition);
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 .nav-links a:hover {
@@ -125,23 +164,23 @@ h3,
 .btn-cta:hover {
     transform: translateY(-2px);
     background: #ec4f86;
+    box-shadow: 0 4px 15px rgba(240,98,146,0.3);
 }
 
 /* =========================
    HERO
 ========================= */
-
 .hero {
     position: relative;
     min-height: 100vh;
     background:
-        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
         url('https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 120px 20px;
+    padding: 140px 20px 100px;
 }
 
 .hero-content {
@@ -157,17 +196,18 @@ h3,
     letter-spacing: 2px;
     text-transform: uppercase;
     font-size: 0.95rem;
+    font-weight: 600;
 }
 
 .hero h1 {
     font-size: 4rem;
-    line-height: 1.1;
-    margin-bottom: 20px;
+    line-height: 1.15;
+    margin-bottom: 25px;
 }
 
 .hero p {
-    font-size: 1.1rem;
-    margin-bottom: 35px;
+    font-size: 1.25rem;
+    margin-bottom: 40px;
     opacity: 0.95;
 }
 
@@ -194,10 +234,12 @@ h3,
 .btn-primary {
     background: var(--primary);
     color: white;
+    border: none;
 }
 
 .btn-primary:hover {
     background: #ec4f86;
+    box-shadow: 0 4px 15px rgba(240,98,146,0.4);
 }
 
 .btn-secondary {
@@ -213,7 +255,6 @@ h3,
 /* =========================
    SECCIONES GENERALES
 ========================= */
-
 section {
     padding: 100px 0;
 }
@@ -240,7 +281,6 @@ section {
 /* =========================
    BENEFICIOS
 ========================= */
-
 .benefits {
     background: var(--bg-light);
 }
@@ -278,10 +318,9 @@ section {
 /* =========================
    PRODUCTOS
 ========================= */
-
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
     gap: 30px;
 }
 
@@ -292,6 +331,8 @@ section {
     box-shadow: var(--shadow);
     transition: var(--transition);
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover {
@@ -306,11 +347,18 @@ section {
 
 .product-info {
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .product-info h3 {
     margin-bottom: 10px;
     color: var(--brown);
+}
+
+.product-info p {
+    flex-grow: 1;
 }
 
 .product-badge {
@@ -334,9 +382,36 @@ section {
 }
 
 /* =========================
-   TESTIMONIOS ESTÁTICOS
+   COUNTDOWN
 ========================= */
+.dt-countdown {
+    background: var(--brown);
+    color: white;
+    text-align: center;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    box-shadow: var(--shadow);
+    border: 2px dashed var(--primary-light);
+}
 
+.dt-countdown h3 {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.timer-digits {
+    font-size: 2.8rem;
+    margin-top: 10px;
+    color: var(--primary-light);
+    letter-spacing: 3px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+/* =========================
+   TESTIMONIOS
+========================= */
 .testimonials {
     background: var(--bg-light);
 }
@@ -371,16 +446,13 @@ section {
     color: var(--brown);
 }
 
-.extra-review {
-    margin-top: 10px;
-    opacity: 0.7;
-    font-size: 0.9rem;
+.client-info span {
+    color: var(--brown-light);
 }
 
 /* =========================
    SLIDER TESTIMONIOS
 ========================= */
-
 .dt-testimonials-section {
     background: white;
 }
@@ -394,7 +466,7 @@ section {
 
 .dt-testimonial-track {
     display: flex;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease-in-out;
 }
 
 .dt-testimonial-card {
@@ -411,10 +483,11 @@ section {
 }
 
 .dt-testimonial-comentario {
-    font-size: 1.1rem;
+    font-size: 1.19rem;
     color: var(--brown);
     margin-bottom: 25px;
     font-style: italic;
+    line-height: 1.7;
 }
 
 .dt-testimonial-nombre {
@@ -438,6 +511,9 @@ section {
     color: white;
     cursor: pointer;
     transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .dt-testimonial-btn:hover {
@@ -445,47 +521,13 @@ section {
     background: #ec4f86;
 }
 
-.dt-testimonial-btn svg {
-    width: 20px;
-    height: 20px;
-}
-
-/* =========================
-   GALERÍA
-========================= */
-
-.dt-gallery {
-    background: var(--white);
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-    gap: 20px;
-}
-
-.gallery-item {
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    height: 320px;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.gallery-item:hover img {
-    transform: scale(1.08);
+.dt-testimonial-btn ion-icon {
+    font-size: 1.3rem;
 }
 
 /* =========================
    FAQ
 ========================= */
-
 .dt-faq {
     max-width: 800px;
     margin: auto;
@@ -514,42 +556,53 @@ section {
 .faq-body {
     max-height: 0;
     overflow: hidden;
-    transition: var(--transition);
+    transition: all 0.4s ease-out;
     padding: 0 18px;
-    color: var(--text);
 }
 
 .faq-item.active .faq-body {
-    max-height: 150px;
+    max-height: 500px;
     padding: 0 18px 18px;
 }
 
-/* =========================
-   CONTADOR
-========================= */
-
-.dt-countdown {
-    background: var(--brown);
-    color: white;
-    text-align: center;
-    padding: 25px;
-    border-radius: 20px;
-    margin-bottom: 50px;
-    box-shadow: var(--shadow);
+.faq-header ion-icon {
+    transition: transform 0.3s ease;
 }
 
-.timer-digits {
-    font-size: 2.2rem;
-    margin-top: 10px;
-    color: var(--primary-light);
-    letter-spacing: 3px;
-    font-family: 'Playfair Display', serif;
+.faq-item.active .faq-header ion-icon {
+    transform: rotate(180deg);
+}
+
+/* =========================
+   GALERÍA
+========================= */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    height: 320px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
 }
 
 /* =========================
    CONTACTO
 ========================= */
-
 .contact {
     background: var(--bg-light);
 }
@@ -610,6 +663,7 @@ section {
 .input-group select:focus,
 .input-group textarea:focus {
     border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(240,98,146,0.1);
 }
 
 textarea {
@@ -621,9 +675,8 @@ textarea {
 }
 
 /* =========================
-   NEWSLETTER POPUP
+   POPUP
 ========================= */
-
 .dt-popup {
     position: fixed;
     right: 20px;
@@ -631,10 +684,10 @@ textarea {
     width: 320px;
     background: white;
     border-radius: 25px;
-    box-shadow: var(--shadow);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     padding: 25px;
     z-index: 3000;
-    transition: 0.7s ease;
+    transition: bottom 0.7s ease;
     border: 2px solid var(--primary-light);
 }
 
@@ -649,6 +702,7 @@ textarea {
 
 .popup-content p {
     margin-bottom: 15px;
+    font-size: 0.9rem;
 }
 
 .input-modern {
@@ -664,12 +718,55 @@ textarea {
     font-size: 1.4rem;
     cursor: pointer;
     color: var(--brown);
+    border: none;
+    background: none;
+}
+
+/* =========================
+   MODAL LEGAL
+========================= */
+.legal-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 4000;
+}
+
+.legal-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.legal-modal-content {
+    background: white;
+    max-width: 600px;
+    width: calc(100% - 40px);
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 20px;
+    padding: 35px;
+    position: relative;
+}
+
+.close-legal-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 /* =========================
    FOOTER
 ========================= */
-
 .footer {
     background: var(--brown);
     color: white;
@@ -706,8 +803,8 @@ textarea {
     justify-content: center;
     color: white;
     font-size: 1.3rem;
-    transition: var(--transition);
     text-decoration: none;
+    transition: var(--transition);
 }
 
 .footer-social a:hover {
@@ -722,16 +819,17 @@ textarea {
     font-size: 0.9rem;
 }
 
-/* =========================
-   ANIMACIONES
-========================= */
-
-.reveal-hidden {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 0.7s ease;
+.footer-bottom p {
+    margin-bottom: 8px;
 }
 
+.footer-legal-link {
+    color: var(--primary-light);
+}
+
+/* =========================
+   REVEAL
+========================= */
 .reveal-visible {
     opacity: 1 !important;
     transform: translateY(0) !important;
@@ -740,9 +838,7 @@ textarea {
 /* =========================
    RESPONSIVE
 ========================= */
-
 @media (max-width: 992px) {
-
     .hero h1 {
         font-size: 3rem;
     }
@@ -762,7 +858,6 @@ textarea {
 }
 
 @media (max-width: 768px) {
-
     .nav-links {
         display: none;
     }
@@ -791,5 +886,9 @@ textarea {
 
     .dt-popup {
         width: calc(100% - 40px);
+    }
+
+    .timer-digits {
+        font-size: 2rem;
     }
 }
