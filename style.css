@@ -892,3 +892,48 @@ textarea {
         font-size: 2rem;
     }
 }
+/* =========================
+   MENSAJE ÉXITO FORMULARIO
+========================= */
+
+.dt-success-box {
+    text-align: center;
+    padding: 40px;
+    border-radius: 20px;
+    background: white;
+    border: 2px solid var(--primary-light);
+    box-shadow: var(--shadow);
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.dt-success-box h3 {
+    color: var(--brown);
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.dt-success-box p {
+    color: var(--text);
+    margin-bottom: 25px;
+}
+
+.reset-form-btn {
+    border: none;
+    background: var(--primary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.reset-form-btn:hover {
+    background: #ec4f86;
+    transform: translateY(-2px);
+}

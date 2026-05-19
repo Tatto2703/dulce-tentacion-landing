@@ -9,7 +9,9 @@
  * ✔ Slider dinámico
  * ✔ Countdown persistente
  * ✔ Popup newsletter
- * ✔ Persistencia formulario
+ * ✔ Persistencia avanzada formulario
+ * ✔ Restauración automática de datos
+ * ✔ Estado persistente de envío
  * ✔ Modal legal
  * ✔ Reveal animations
  * ✔ Scroll suave
@@ -18,6 +20,7 @@
  */
 
 (() => {
+
     'use strict';
 
     /**
@@ -30,11 +33,20 @@
         name,
         promo = 0
     }) => {
-        const today = new Date().toLocaleDateString('es-ES', {
-            weekday: 'long'
-        });
 
-        return `✨ [${label}] Celebramos este ${today} con "${name}" con -${promo}%`;
+        const today = new Date().toLocaleDateString(
+            'es-ES',
+            {
+                weekday: 'long'
+            }
+        );
+
+        return `
+            ✨ [${label}]
+            Celebramos este ${today}
+            con "${name}" con -${promo}%
+        `;
+
     };
 
     /**
@@ -43,11 +55,20 @@
      * ==========================================
      */
     const logSectionIdentifiers = () => {
-        const sections = [...document.querySelectorAll('section')];
 
-        const ids = sections.map(section => section.id || 'sin-id');
+        const sections = [
+            ...document.querySelectorAll('section')
+        ];
 
-        console.log('🍰 Secciones detectadas:', ids);
+        const ids = sections.map(
+            section => section.id || 'sin-id'
+        );
+
+        console.log(
+            '🍰 Secciones detectadas:',
+            ids
+        );
+
     };
 
     /**
@@ -56,6 +77,7 @@
      * ==========================================
      */
     const computeStats = () => {
+
         const reviews = [
             { stars: 5, active: true },
             { stars: 4, active: true },
@@ -63,7 +85,9 @@
             { stars: 5, active: true }
         ];
 
-        const activeReviews = reviews.filter(r => r.active);
+        const activeReviews = reviews.filter(
+            review => review.active
+        );
 
         const total = activeReviews.reduce(
             (acc, review) => acc + review.stars,
@@ -78,6 +102,7 @@
         console.log(
             `⭐ Promedio actual: ${average}/5`
         );
+
     };
 
     /**
@@ -87,16 +112,21 @@
      */
     const DulceTentacion = {
 
+        /**
+         * ==========================================
+         * ESTADO GLOBAL
+         * ==========================================
+         */
         state: {
-            formSubmittedKey: 'dt_form_submitted',
+
             currentSliderIndex: 0,
+
             timeRemaining: 3600,
-            inputsToPersist: [
-                'nombre',
-                'correo',
-                'tipoPedido',
-                'mensaje'
-            ]
+
+            formStorageKey: 'dt_form_data',
+
+            formSentKey: 'dt_form_sent'
+
         },
 
         /**
@@ -105,34 +135,52 @@
          * ==========================================
          */
         init() {
+
             logSectionIdentifiers();
+
             computeStats();
+
             this.showGreeting();
 
             this.initNavbar();
+
             this.initReveal();
+
             this.initSmoothScroll();
+
             this.initFormPersistence();
+
             this.initSlider();
+
             this.initFAQ();
+
             this.initCountdown();
+
             this.initPopup();
+
             this.initLegalModal();
+
         },
 
         /**
          * ==========================================
-         * CONSOLA
+         * MENSAJE CONSOLA
          * ==========================================
          */
         showGreeting() {
+
             const message = renderOffersFeed({
+
                 label: 'DELICIA DEL DÍA',
+
                 name: 'Mousse de Chocolate Belga',
+
                 promo: 15
+
             });
 
             console.log(message);
+
         },
 
         /**
@@ -141,19 +189,29 @@
          * ==========================================
          */
         initNavbar() {
-            const navbar = document.getElementById('navbar');
+
+            const navbar =
+                document.getElementById('navbar');
 
             if (!navbar) return;
 
-            window.addEventListener('scroll', () => {
+            window.addEventListener(
+                'scroll',
+                () => {
 
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
+                    if (window.scrollY > 50) {
+
+                        navbar.classList.add('scrolled');
+
+                    } else {
+
+                        navbar.classList.remove('scrolled');
+
+                    }
+
                 }
+            );
 
-            });
         },
 
         /**
@@ -164,21 +222,31 @@
         initReveal() {
 
             const observer = new IntersectionObserver(
+
                 entries => {
 
                     entries.forEach(entry => {
 
                         if (entry.isIntersecting) {
-                            entry.target.classList.add('reveal-visible');
-                            observer.unobserve(entry.target);
+
+                            entry.target.classList.add(
+                                'reveal-visible'
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
                         }
 
                     });
 
                 },
+
                 {
                     threshold: 0.15
                 }
+
             );
 
             const elements = document.querySelectorAll(
@@ -188,12 +256,17 @@
             elements.forEach(el => {
 
                 el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'all 0.6s ease-out';
+
+                el.style.transform =
+                    'translateY(20px)';
+
+                el.style.transition =
+                    'all 0.6s ease-out';
 
                 observer.observe(el);
 
             });
+
         },
 
         /**
@@ -203,28 +276,45 @@
          */
         initSmoothScroll() {
 
-            const anchors = document.querySelectorAll('a[href^="#"]');
+            const anchors =
+                document.querySelectorAll(
+                    'a[href^="#"]'
+                );
 
             anchors.forEach(anchor => {
 
-                anchor.addEventListener('click', e => {
+                anchor.addEventListener(
+                    'click',
+                    e => {
 
-                    const href = anchor.getAttribute('href');
+                        const href =
+                            anchor.getAttribute('href');
 
-                    if (!href || href === '#') return;
+                        if (
+                            !href ||
+                            href === '#'
+                        ) {
+                            return;
+                        }
 
-                    const target = document.querySelector(href);
+                        const target =
+                            document.querySelector(href);
 
-                    if (!target) return;
+                        if (!target) return;
 
-                    e.preventDefault();
+                        e.preventDefault();
 
-                    window.scrollTo({
-                        top: target.offsetTop - 85,
-                        behavior: 'smooth'
-                    });
+                        window.scrollTo({
 
-                });
+                            top:
+                                target.offsetTop - 85,
+
+                            behavior: 'smooth'
+
+                        });
+
+                    }
+                );
 
             });
 
@@ -232,25 +322,126 @@
 
         /**
          * ==========================================
-         * FORMULARIO PERSISTENTE
+         * FORMULARIO PERSISTENTE AVANZADO
          * ==========================================
          */
         initFormPersistence() {
 
-            const form = document.getElementById('landing-form');
+            const form =
+                document.getElementById(
+                    'landing-form'
+                );
 
             if (!form) return;
 
-            const formSubmittedKey =
-                this.state.formSubmittedKey;
+            /**
+             * Inputs
+             */
+            const inputs = {
+
+                nombre:
+                    document.getElementById('nombre'),
+
+                correo:
+                    document.getElementById('correo'),
+
+                tipoPedido:
+                    document.getElementById('tipoPedido'),
+
+                mensaje:
+                    document.getElementById('mensaje')
+
+            };
 
             /**
-             * Estado de éxito
+             * ==========================================
+             * GUARDAR DATOS
+             * ==========================================
              */
-            const showSuccessState = () => {
+            const saveFormData = () => {
+
+                const data = {
+
+                    nombre:
+                        inputs.nombre?.value || '',
+
+                    correo:
+                        inputs.correo?.value || '',
+
+                    tipoPedido:
+                        inputs.tipoPedido?.value || '',
+
+                    mensaje:
+                        inputs.mensaje?.value || ''
+
+                };
+
+                localStorage.setItem(
+                    this.state.formStorageKey,
+                    JSON.stringify(data)
+                );
+
+            };
+
+            /**
+             * ==========================================
+             * RESTAURAR DATOS
+             * ==========================================
+             */
+            const restoreFormData = () => {
+
+                const savedData =
+                    localStorage.getItem(
+                        this.state.formStorageKey
+                    );
+
+                if (!savedData) return;
+
+                try {
+
+                    const data =
+                        JSON.parse(savedData);
+
+                    if (inputs.nombre) {
+                        inputs.nombre.value =
+                            data.nombre || '';
+                    }
+
+                    if (inputs.correo) {
+                        inputs.correo.value =
+                            data.correo || '';
+                    }
+
+                    if (inputs.tipoPedido) {
+                        inputs.tipoPedido.value =
+                            data.tipoPedido || '';
+                    }
+
+                    if (inputs.mensaje) {
+                        inputs.mensaje.value =
+                            data.mensaje || '';
+                    }
+
+                } catch(error) {
+
+                    console.error(
+                        'Error restaurando formulario:',
+                        error
+                    );
+
+                }
+
+            };
+
+            /**
+             * ==========================================
+             * RENDER ÉXITO
+             * ==========================================
+             */
+            const renderSuccessMessage = () => {
 
                 form.innerHTML = `
-                    <div class="success-message">
+                    <div class="dt-success-box">
 
                         <ion-icon
                             name="checkmark-circle-outline"
@@ -258,14 +449,18 @@
                         </ion-icon>
 
                         <h3>
-                            ¡Gracias por tu solicitud! 🍰
+                            ¡Solicitud enviada correctamente! 🍰
                         </h3>
 
                         <p>
-                            Hemos recibido tu información correctamente.
+                            Hemos recibido tu información y nos pondremos en contacto contigo muy pronto.
                         </p>
 
-                        <button id="resetFormState">
+                        <button
+                            type="button"
+                            id="resetFormState"
+                            class="reset-form-btn"
+                        >
                             Enviar otra solicitud
                         </button>
 
@@ -273,64 +468,96 @@
                 `;
 
                 const resetBtn =
-                    document.getElementById('resetFormState');
+                    document.getElementById(
+                        'resetFormState'
+                    );
 
-                if (!resetBtn) return;
+                if (resetBtn) {
 
-                resetBtn.addEventListener('click', () => {
+                    resetBtn.addEventListener(
+                        'click',
+                        () => {
 
-                    localStorage.removeItem(formSubmittedKey);
+                            localStorage.removeItem(
+                                this.state.formSentKey
+                            );
 
-                    this.state.inputsToPersist.forEach(id => {
-                        localStorage.removeItem(id);
-                    });
+                            localStorage.removeItem(
+                                this.state.formStorageKey
+                            );
 
-                    location.reload();
+                            location.reload();
 
-                });
+                        }
+                    );
+
+                }
 
             };
 
             /**
-             * Si ya fue enviado
+             * ==========================================
+             * SI YA FUE ENVIADO
+             * ==========================================
              */
             if (
-                localStorage.getItem(formSubmittedKey) === 'true'
+                localStorage.getItem(
+                    this.state.formSentKey
+                ) === 'true'
             ) {
-                showSuccessState();
+
+                renderSuccessMessage();
+
                 return;
+
             }
 
             /**
-             * Persistencia inputs
+             * ==========================================
+             * RESTAURAR DATOS
+             * ==========================================
              */
-            this.state.inputsToPersist.forEach(id => {
+            restoreFormData();
 
-                const field =
-                    document.getElementById(id);
+            /**
+             * ==========================================
+             * GUARDADO EN TIEMPO REAL
+             * ==========================================
+             */
+            Object.values(inputs).forEach(input => {
 
-                if (!field) return;
+                if (!input) return;
 
-                field.value =
-                    localStorage.getItem(id) || '';
+                input.addEventListener(
+                    'input',
+                    saveFormData
+                );
 
-                field.addEventListener('input', () => {
-                    localStorage.setItem(id, field.value);
-                });
+                input.addEventListener(
+                    'change',
+                    saveFormData
+                );
 
             });
 
             /**
-             * Submit
+             * ==========================================
+             * SUBMIT FORMULARIO
+             * ==========================================
              */
-            form.addEventListener('submit', () => {
+            form.addEventListener(
+                'submit',
+                () => {
 
-                localStorage.setItem(
-                    formSubmittedKey,
-                    'true'
-                );
+                    localStorage.setItem(
+                        this.state.formSentKey,
+                        'true'
+                    );
 
-            });
+                    saveFormData();
+
+                }
+            );
 
         },
 
@@ -342,16 +569,24 @@
         initSlider() {
 
             const track =
-                document.getElementById('dtTestimonialTrack');
+                document.getElementById(
+                    'dtTestimonialTrack'
+                );
 
             const cards =
-                document.querySelectorAll('.dt-testimonial-card');
+                document.querySelectorAll(
+                    '.dt-testimonial-card'
+                );
 
             const nextBtn =
-                document.getElementById('dtNextBtn');
+                document.getElementById(
+                    'dtNextBtn'
+                );
 
             const prevBtn =
-                document.getElementById('dtPrevBtn');
+                document.getElementById(
+                    'dtPrevBtn'
+                );
 
             if (
                 !track ||
@@ -369,25 +604,33 @@
 
             };
 
-            nextBtn.addEventListener('click', () => {
+            nextBtn.addEventListener(
+                'click',
+                () => {
 
-                this.state.currentSliderIndex =
-                    (this.state.currentSliderIndex + 1)
-                    % cards.length;
+                    this.state.currentSliderIndex =
+                        (
+                            this.state.currentSliderIndex + 1
+                        ) % cards.length;
 
-                updateSlider();
+                    updateSlider();
 
-            });
+                }
+            );
 
-            prevBtn.addEventListener('click', () => {
+            prevBtn.addEventListener(
+                'click',
+                () => {
 
-                this.state.currentSliderIndex =
-                    (this.state.currentSliderIndex - 1 + cards.length)
-                    % cards.length;
+                    this.state.currentSliderIndex =
+                        (
+                            this.state.currentSliderIndex - 1 + cards.length
+                        ) % cards.length;
 
-                updateSlider();
+                    updateSlider();
 
-            });
+                }
+            );
 
         },
 
@@ -399,64 +642,86 @@
         initFAQ() {
 
             const headers =
-                document.querySelectorAll('.faq-header');
+                document.querySelectorAll(
+                    '.faq-header'
+                );
 
             headers.forEach(header => {
 
-                header.addEventListener('click', () => {
+                header.addEventListener(
+                    'click',
+                    () => {
 
-                    const item =
-                        header.parentElement;
+                        const item =
+                            header.parentElement;
 
-                    if (!item) return;
+                        if (!item) return;
 
-                    const expanded =
-                        header.getAttribute('aria-expanded') === 'true';
+                        const expanded =
+                            header.getAttribute(
+                                'aria-expanded'
+                            ) === 'true';
 
-                    document.querySelectorAll('.faq-item')
-                        .forEach(faq => {
+                        document
+                            .querySelectorAll('.faq-item')
+                            .forEach(faq => {
 
-                            faq.classList.remove('active');
-
-                            const faqHeader =
-                                faq.querySelector('.faq-header');
-
-                            if (faqHeader) {
-                                faqHeader.setAttribute(
-                                    'aria-expanded',
-                                    'false'
+                                faq.classList.remove(
+                                    'active'
                                 );
-                            }
 
-                        });
+                                const faqHeader =
+                                    faq.querySelector(
+                                        '.faq-header'
+                                    );
 
-                    if (!expanded) {
+                                if (faqHeader) {
 
-                        item.classList.add('active');
+                                    faqHeader.setAttribute(
+                                        'aria-expanded',
+                                        'false'
+                                    );
 
-                        header.setAttribute(
-                            'aria-expanded',
-                            'true'
-                        );
+                                }
+
+                            });
+
+                        if (!expanded) {
+
+                            item.classList.add(
+                                'active'
+                            );
+
+                            header.setAttribute(
+                                'aria-expanded',
+                                'true'
+                            );
+
+                        }
 
                     }
-
-                });
+                );
 
                 /**
-                 * Accesibilidad teclado
+                 * Teclado accesible
                  */
-                header.addEventListener('keydown', e => {
+                header.addEventListener(
+                    'keydown',
+                    e => {
 
-                    if (
-                        e.key === 'Enter' ||
-                        e.key === ' '
-                    ) {
-                        e.preventDefault();
-                        header.click();
+                        if (
+                            e.key === 'Enter' ||
+                            e.key === ' '
+                        ) {
+
+                            e.preventDefault();
+
+                            header.click();
+
+                        }
+
                     }
-
-                });
+                );
 
             });
 
@@ -470,26 +735,36 @@
         initCountdown() {
 
             const saved =
-                sessionStorage.getItem('dt_countdown');
+                sessionStorage.getItem(
+                    'dt_countdown'
+                );
 
             if (saved) {
+
                 this.state.timeRemaining =
                     parseInt(saved, 10);
+
             }
 
             const timerEl =
-                document.getElementById('countdown-timer');
+                document.getElementById(
+                    'countdown-timer'
+                );
 
             if (!timerEl) return;
 
             const updateDisplay = () => {
 
                 const h =
-                    Math.floor(this.state.timeRemaining / 3600);
+                    Math.floor(
+                        this.state.timeRemaining / 3600
+                    );
 
                 const m =
                     Math.floor(
-                        (this.state.timeRemaining % 3600) / 60
+                        (
+                            this.state.timeRemaining % 3600
+                        ) / 60
                     );
 
                 const s =
@@ -504,27 +779,34 @@
 
             updateDisplay();
 
-            const interval = setInterval(() => {
+            const interval = setInterval(
+                () => {
 
-                if (this.state.timeRemaining <= 0) {
+                    if (
+                        this.state.timeRemaining <= 0
+                    ) {
 
-                    clearInterval(interval);
+                        clearInterval(interval);
 
-                    timerEl.textContent = '00:00:00';
+                        timerEl.textContent =
+                            '00:00:00';
 
-                    return;
-                }
+                        return;
 
-                this.state.timeRemaining--;
+                    }
 
-                sessionStorage.setItem(
-                    'dt_countdown',
-                    this.state.timeRemaining
-                );
+                    this.state.timeRemaining--;
 
-                updateDisplay();
+                    sessionStorage.setItem(
+                        'dt_countdown',
+                        this.state.timeRemaining
+                    );
 
-            }, 1000);
+                    updateDisplay();
+
+                },
+                1000
+            );
 
         },
 
@@ -536,7 +818,9 @@
         initPopup() {
 
             const popup =
-                document.getElementById('dt-newsletter');
+                document.getElementById(
+                    'dt-newsletter'
+                );
 
             if (!popup) return;
 
@@ -546,32 +830,42 @@
             setTimeout(() => {
 
                 if (
-                    sessionStorage.getItem('dt_popup_closed')
-                    !== 'true'
+                    sessionStorage.getItem(
+                        'dt_popup_closed'
+                    ) !== 'true'
                 ) {
+
                     popup.classList.add('show');
+
                 }
 
             }, 5000);
 
             /**
-             * Cerrar popup
+             * Botón cerrar
              */
             const closeBtn =
-                document.querySelector('.close-popup');
+                document.querySelector(
+                    '.close-popup'
+                );
 
             if (closeBtn) {
 
-                closeBtn.addEventListener('click', () => {
+                closeBtn.addEventListener(
+                    'click',
+                    () => {
 
-                    popup.classList.remove('show');
+                        popup.classList.remove(
+                            'show'
+                        );
 
-                    sessionStorage.setItem(
-                        'dt_popup_closed',
-                        'true'
-                    );
+                        sessionStorage.setItem(
+                            'dt_popup_closed',
+                            'true'
+                        );
 
-                });
+                    }
+                );
 
             }
 
@@ -579,22 +873,28 @@
              * Persistencia email
              */
             const popupEmail =
-                document.getElementById('popup-email');
+                document.getElementById(
+                    'popup-email'
+                );
 
             if (popupEmail) {
 
                 popupEmail.value =
-                    localStorage.getItem('dt_newsletter_email')
-                    || '';
+                    localStorage.getItem(
+                        'dt_newsletter_email'
+                    ) || '';
 
-                popupEmail.addEventListener('input', () => {
+                popupEmail.addEventListener(
+                    'input',
+                    () => {
 
-                    localStorage.setItem(
-                        'dt_newsletter_email',
-                        popupEmail.value
-                    );
+                        localStorage.setItem(
+                            'dt_newsletter_email',
+                            popupEmail.value
+                        );
 
-                });
+                    }
+                );
 
             }
 
@@ -602,38 +902,47 @@
              * Submit popup
              */
             const popupForm =
-                document.getElementById('popup-form');
+                document.getElementById(
+                    'popup-form'
+                );
 
             if (popupForm) {
 
-                popupForm.addEventListener('submit', e => {
+                popupForm.addEventListener(
+                    'submit',
+                    e => {
 
-                    e.preventDefault();
+                        e.preventDefault();
 
-                    popup.innerHTML = `
-                        <div class="popup-success">
-                            <h4>
-                                ¡Inscripción exitosa! 💌
-                            </h4>
+                        popup.innerHTML = `
+                            <div class="popup-success">
 
-                            <p>
-                                Ya haces parte de nuestra comunidad dulce.
-                            </p>
-                        </div>
-                    `;
+                                <h4>
+                                    ¡Inscripción exitosa! 💌
+                                </h4>
 
-                    setTimeout(() => {
+                                <p>
+                                    Ya haces parte de nuestra comunidad dulce.
+                                </p>
 
-                        popup.classList.remove('show');
+                            </div>
+                        `;
 
-                        sessionStorage.setItem(
-                            'dt_popup_closed',
-                            'true'
-                        );
+                        setTimeout(() => {
 
-                    }, 3000);
+                            popup.classList.remove(
+                                'show'
+                            );
 
-                });
+                            sessionStorage.setItem(
+                                'dt_popup_closed',
+                                'true'
+                            );
+
+                        }, 3000);
+
+                    }
+                );
 
             }
 
@@ -647,13 +956,19 @@
         initLegalModal() {
 
             const trigger =
-                document.getElementById('legal-trigger');
+                document.getElementById(
+                    'legal-trigger'
+                );
 
             const modal =
-                document.getElementById('legal-modal');
+                document.getElementById(
+                    'legal-modal'
+                );
 
             const closeBtn =
-                document.getElementById('close-legal-modal');
+                document.getElementById(
+                    'close-legal-modal'
+                );
 
             if (
                 !trigger ||
@@ -664,55 +979,79 @@
             }
 
             /**
-             * Abrir
+             * Abrir modal
              */
-            trigger.addEventListener('click', e => {
+            trigger.addEventListener(
+                'click',
+                e => {
 
-                e.preventDefault();
+                    e.preventDefault();
 
-                modal.classList.add('active');
+                    modal.classList.add(
+                        'active'
+                    );
 
-                document.body.style.overflow = 'hidden';
+                    document.body.style.overflow =
+                        'hidden';
 
-            });
+                }
+            );
 
             /**
-             * Cerrar
+             * Función cerrar
              */
             const closeModal = () => {
 
-                modal.classList.remove('active');
+                modal.classList.remove(
+                    'active'
+                );
 
                 document.body.style.overflow = '';
 
             };
 
-            closeBtn.addEventListener('click', closeModal);
+            /**
+             * Botón cerrar
+             */
+            closeBtn.addEventListener(
+                'click',
+                closeModal
+            );
 
             /**
              * Click fuera
              */
-            modal.addEventListener('click', e => {
+            modal.addEventListener(
+                'click',
+                e => {
 
-                if (e.target === modal) {
-                    closeModal();
+                    if (e.target === modal) {
+
+                        closeModal();
+
+                    }
+
                 }
-
-            });
+            );
 
             /**
              * Escape
              */
-            document.addEventListener('keydown', e => {
+            document.addEventListener(
+                'keydown',
+                e => {
 
-                if (
-                    e.key === 'Escape' &&
-                    modal.classList.contains('active')
-                ) {
-                    closeModal();
+                    if (
+                        e.key === 'Escape' &&
+                        modal.classList.contains('active')
+                    ) {
+
+                        closeModal();
+
+                    }
+
                 }
-
-            });
+            );
 
         }
 
@@ -726,7 +1065,9 @@
     document.addEventListener(
         'DOMContentLoaded',
         () => {
+
             DulceTentacion.init();
+
         }
     );
 
