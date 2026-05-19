@@ -1,12 +1,4 @@
-/**
- * script.js - Dulce Tentación
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-
-    /* =========================
-       VARIABLES
-    ========================= */
 
     const navbar = document.getElementById('navbar');
     const form = document.getElementById('landing-form');
@@ -16,9 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tipoPedido = document.getElementById('tipoPedido');
     const mensaje = document.getElementById('mensaje');
 
-    /* =========================
-       NAVBAR SCROLL
-    ========================= */
+    /* NAVBAR */
 
     window.addEventListener('scroll', () => {
 
@@ -30,9 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    /* =========================
-       ANIMACIONES
-    ========================= */
+    /* REVEAL */
 
     const observerOptions = {
         threshold: 0.15
@@ -67,9 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    /* =========================
-       RESTAURAR DATOS
-    ========================= */
+    /* LOCAL STORAGE */
 
     if (nombre) {
         nombre.value = localStorage.getItem("lp_dulce_nombre") || "";
@@ -86,10 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mensaje) {
         mensaje.value = localStorage.getItem("lp_dulce_mensaje") || "";
     }
-
-    /* =========================
-       GUARDAR DATOS
-    ========================= */
 
     if (nombre) {
 
@@ -143,25 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    /* =========================
-       ENVÍO FORMULARIO
-    ========================= */
+    /* FORM */
 
     if (form) {
 
         form.addEventListener('submit', (e) => {
 
             e.preventDefault();
-
-            localStorage.setItem(
-                "lp_dulce_convertido",
-                "true"
-            );
-
-            localStorage.removeItem("lp_dulce_nombre");
-            localStorage.removeItem("lp_dulce_correo");
-            localStorage.removeItem("lp_dulce_tipo");
-            localStorage.removeItem("lp_dulce_mensaje");
 
             const submitBtn = form.querySelector('button');
 
@@ -171,36 +141,19 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
 
                 form.innerHTML = `
-                    <div style="text-align: center; padding: 40px; background: #E8F5E9; border-radius: 20px;">
-                        
-                        <h3 style="margin-top: 15px; color: #2E7D32">
-                            ¡Solicitud Enviada!
-                        </h3>
-
-                        <p style="margin-top: 10px">
-                            Nos pondremos en contacto contigo en las próximas 24 horas.
-                        </p>
-
-                        <button 
-                            class="btn btn-primary" 
-                            style="margin-top: 20px"
-                            onclick="location.reload()"
-                        >
-                            Regresar
-                        </button>
-
+                    <div style="text-align:center;padding:40px;">
+                        <h3>¡Solicitud enviada! 🍰</h3>
+                        <p>Nos contactaremos contigo pronto.</p>
                     </div>
                 `;
 
-            }, 2000);
+            }, 1500);
 
         });
 
     }
 
-    /* =========================
-       SMOOTH SCROLL
-    ========================= */
+    /* SMOOTH SCROLL */
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
@@ -225,9 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    /* =========================
-       SLIDER TESTIMONIOS
-    ========================= */
+    /* SLIDER */
 
     const track = document.getElementById('dtTestimonialTrack');
     const cards = document.querySelectorAll('.dt-testimonial-card');
@@ -243,13 +194,17 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         nextBtn.addEventListener('click', () => {
+
             currentIndex = (currentIndex + 1) % cards.length;
             updateSlider();
+
         });
 
         prevBtn.addEventListener('click', () => {
+
             currentIndex = (currentIndex - 1 + cards.length) % cards.length;
             updateSlider();
+
         });
 
     }
