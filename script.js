@@ -321,26 +321,127 @@
         },
 
         /**
-        * ==========================================
-        * FORMULARIO PERSISTENTE (CORREGIDO)
-        * ==========================================
-        */
+         * ==========================================
+         * FORMULARIO PERSISTENTE AVANZADO
+         * ==========================================
+         */
         initFormPersistence() {
 
-            const form = document.getElementById('landing-form');
+            const form =
+                document.getElementById(
+                    'landing-form'
+                );
 
             if (!form) return;
 
-            const formSubmittedKey =
-                this.state.formSubmittedKey;
+            /**
+             * Inputs
+             */
+            const inputs = {
+
+                nombre:
+                    document.getElementById('nombre'),
+
+                correo:
+                    document.getElementById('correo'),
+
+                tipoPedido:
+                    document.getElementById('tipoPedido'),
+
+                mensaje:
+                    document.getElementById('mensaje')
+
+            };
 
             /**
-            * Mostrar estado exitoso
-            */
-            const showSuccessState = () => {
+             * ==========================================
+             * GUARDAR DATOS
+             * ==========================================
+             */
+            const saveFormData = () => {
+
+                const data = {
+
+                    nombre:
+                        inputs.nombre?.value || '',
+
+                    correo:
+                        inputs.correo?.value || '',
+
+                    tipoPedido:
+                        inputs.tipoPedido?.value || '',
+
+                    mensaje:
+                        inputs.mensaje?.value || ''
+
+                };
+
+                localStorage.setItem(
+                    this.state.formStorageKey,
+                    JSON.stringify(data)
+                );
+
+            };
+
+            /**
+             * ==========================================
+             * RESTAURAR DATOS
+             * ==========================================
+             */
+            const restoreFormData = () => {
+
+                const savedData =
+                    localStorage.getItem(
+                        this.state.formStorageKey
+                    );
+
+                if (!savedData) return;
+
+                try {
+
+                    const data =
+                        JSON.parse(savedData);
+
+                    if (inputs.nombre) {
+                        inputs.nombre.value =
+                            data.nombre || '';
+                    }
+
+                    if (inputs.correo) {
+                        inputs.correo.value =
+                            data.correo || '';
+                    }
+
+                    if (inputs.tipoPedido) {
+                        inputs.tipoPedido.value =
+                            data.tipoPedido || '';
+                    }
+
+                    if (inputs.mensaje) {
+                        inputs.mensaje.value =
+                            data.mensaje || '';
+                    }
+
+                } catch(error) {
+
+                    console.error(
+                        'Error restaurando formulario:',
+                        error
+                    );
+
+                }
+
+            };
+
+            /**
+             * ==========================================
+             * RENDER ÉXITO
+             * ==========================================
+             */
+            const renderSuccessMessage = () => {
 
                 form.innerHTML = `
-                    <div class="success-message">
+                    <div class="dt-success-box">
 
                         <ion-icon
                             name="checkmark-circle-outline"
@@ -348,14 +449,18 @@
                         </ion-icon>
 
                         <h3>
-                            ¡Gracias por tu solicitud! 🍰
+                            ¡Solicitud enviada correctamente! 🍰
                         </h3>
 
                         <p>
-                            Tu formulario ya fue enviado correctamente.
+                            Hemos recibido tu información y nos pondremos en contacto contigo muy pronto.
                         </p>
 
-                        <button id="resetFormState">
+                        <button
+                            type="button"
+                            id="resetFormState"
+                            class="reset-form-btn"
+                        >
                             Enviar otra solicitud
                         </button>
 
@@ -363,123 +468,96 @@
                 `;
 
                 const resetBtn =
-                    document.getElementById('resetFormState');
+                    document.getElementById(
+                        'resetFormState'
+                    );
 
-                if (!resetBtn) return;
+                if (resetBtn) {
 
-                resetBtn.addEventListener('click', () => {
+                    resetBtn.addEventListener(
+                        'click',
+                        () => {
 
-                    /**
-                    * Limpiar datos guardados
-                    */
-                    localStorage.removeItem(formSubmittedKey);
+                            localStorage.removeItem(
+                                this.state.formSentKey
+                            );
 
-                    this.state.inputsToPersist.forEach(id => {
-                        localStorage.removeItem(id);
-                    });
+                            localStorage.removeItem(
+                                this.state.formStorageKey
+                            );
 
-                    /**
-                    * Recargar página
-                    */
-                    location.reload();
+                            location.reload();
 
-                });
+                        }
+                    );
+
+                }
 
             };
 
             /**
-            * ==========================================
-            * VERIFICAR SI YA FUE ENVIADO
-            * ==========================================
-            */
-            const alreadySubmitted =
-                localStorage.getItem(formSubmittedKey);
+             * ==========================================
+             * SI YA FUE ENVIADO
+             * ==========================================
+             */
+            if (
+                localStorage.getItem(
+                    this.state.formSentKey
+                ) === 'true'
+            ) {
 
-            if (alreadySubmitted === 'true') {
-
-                showSuccessState();
+                renderSuccessMessage();
 
                 return;
+
             }
 
             /**
-            * ==========================================
-            * RECUPERAR DATOS GUARDADOS
-            * ==========================================
-            */
-            this.state.inputsToPersist.forEach(id => {
+             * ==========================================
+             * RESTAURAR DATOS
+             * ==========================================
+             */
+            restoreFormData();
 
-                const field =
-                    document.getElementById(id);
+            /**
+             * ==========================================
+             * GUARDADO EN TIEMPO REAL
+             * ==========================================
+             */
+            Object.values(inputs).forEach(input => {
 
-                if (!field) return;
+                if (!input) return;
 
-                /**
-                * Restaurar valor
-                */
-                const savedValue =
-                    localStorage.getItem(id);
+                input.addEventListener(
+                    'input',
+                    saveFormData
+                );
 
-                if (savedValue) {
-                    field.value = savedValue;
-                }
-
-                /**
-                * Guardar mientras escribe
-                */
-                field.addEventListener('input', () => {
-
-                    localStorage.setItem(
-                        id,
-                        field.value
-                    );
-
-                });
+                input.addEventListener(
+                    'change',
+                    saveFormData
+                );
 
             });
 
             /**
-            * ==========================================
-            * SUBMIT DEL FORMULARIO
-            * ==========================================
-            */
-            form.addEventListener('submit', e => {
+             * ==========================================
+             * SUBMIT FORMULARIO
+             * ==========================================
+             */
+            form.addEventListener(
+                'submit',
+                () => {
 
-                e.preventDefault();
+                    localStorage.setItem(
+                        this.state.formSentKey,
+                        'true'
+                    );
 
-                /**
-                * Guardar estado enviado
-                */
-                localStorage.setItem(
-                    formSubmittedKey,
-                    'true'
-                );
+                    saveFormData();
 
-                /**
-                * Guardar inputs finales
-                */
-                this.state.inputsToPersist.forEach(id => {
-
-                    const field =
-                        document.getElementById(id);
-
-                    if (field) {
-
-                        localStorage.setItem(
-                            id,
-                            field.value
-                        );
-
-                    }
-
-                });
-
-                /**
-                * Mostrar mensaje inmediatamente
-                */
-                showSuccessState();
-
-            });
+                }
+            );
 
         },
 
